@@ -9,6 +9,8 @@ int main()
   string fileName; //to get the name of the file to open
   string line; //to store a single line of a text file
   fstream fileStream; //to open a file for reading
+  int number = 0;
+  int c = 0;
 
   cout<<"What file do you want to open? ";
   getline(cin, fileName);
@@ -19,19 +21,29 @@ int main()
   {
     cout<<fileName<<" opened.\nFILE CONTENTS:\n";
    
+    do
+    {
+        getline(fileStream, line);
+        cout<<line<<endl;
+        number++;
+        c += line.length();
+
+    } while (line.empty() == false);
     
-        cout<<fileName<<endl;
-    
-    // 3A: read a line from fileStream into the variable line
-    // 3B: display the line, followed by an endline
-  
-    //STEP 4: close the fileStream
-  
   }
   else
   {
     cout<<fileName<<" could not be opened.\n";
   }
+    
+  if(fileStream.is_open())
+  {
+        cout<<"METADATA\nFile: "<<fileName<<endl;
+        cout<<"Lines: "<<number-1<<endl;
+        cout<<"Charachters: "<<c<<endl;
+  }
+  
+  fileStream.close();
 
   return 0;
 }
